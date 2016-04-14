@@ -9,12 +9,14 @@ session = Session()
 
 
 def createTables():
-    models.Base.metadataModel.create_all(models.engine)
+    models.Base.metadata.create_all(models.engine)
 
 
-def tablesExist():
-    return models.engine.dialect.has_table(models.engine.connect(), "tests") and models.engine.dialect.has_table(models.engine.connect(), "statistics")
+def addData():
+    test = models.Test(question="targets = []\nfor follower in followers:\n\ttargets.append(follower)", answer="[follower for follower in followers]", difficulty="easy")
+    session.add(test)
+    session.commit()
 
 
 def retrieve_random_test(difficulty):
-    return session.query(models.Test).filter(models.Test.difficulty == difficulty).order_by(func.random()).limit(1)
+    return session.query(models.Test).filter(models.Test.difficulty == difficulty).order_by(func.random()).first()

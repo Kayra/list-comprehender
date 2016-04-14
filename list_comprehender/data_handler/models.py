@@ -2,7 +2,7 @@ from sqlalchemy import create_engine, ForeignKey, Column, Integer, String
 from sqlalchemy.orm import relationship
 from sqlalchemy.ext.declarative import declarative_base
 
-engine = create_engine("sqlite:///list-comprehender.db", echo=True)
+engine = create_engine("sqlite:///list-comprehender.db")
 
 Base = declarative_base()
 
@@ -16,7 +16,7 @@ class Test(Base):
     answer = Column(String)
     difficulty = Column(String)
 
-    statistic = relationship("Statistic", uselist=False, back_populates="statistics")
+    statistic = relationship("Statistic", uselist=False, back_populates="test")
 
     def __repr__(self):
         return "Question: %s" % self.question
@@ -31,7 +31,7 @@ class Statistic(Base):
     correct = Column(Integer)
     incorrect = Column(Integer)
 
-    question = relationship("Test", back_populates="tests")
+    test = relationship("Test", back_populates="statistic")
 
     def __repr__(self):
         return "Statistics for %" % self.question.question
