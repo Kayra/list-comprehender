@@ -5,9 +5,6 @@ from list_comprehender.data_handler import data_handler
 class ListComprehender(object):
 
     def __init__(self):
-
-        data_handler.createTables()
-        data_handler.addData()
         self.introduction()
         self.test_comprehension()
         sys.exit()
@@ -32,7 +29,6 @@ class ListComprehender(object):
         print(test['question'], "\n")
 
         answer = input(">>> ")
-
         self.check_answer(answer, test['answer'])
 
 

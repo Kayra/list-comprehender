@@ -12,8 +12,8 @@ def createTables():
     models.Base.metadata.create_all(models.engine)
 
 
-def addData():
-    test = models.Test(question="targets = []\nfor follower in followers:\n\ttargets.append(follower)", answer="[follower for follower in followers]", difficulty="easy")
+def addData(question, answer, difficulty):
+    test = models.Test(question=question, answer=answer, difficulty=difficulty)
     session.add(test)
     session.commit()
 
